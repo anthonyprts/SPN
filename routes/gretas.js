@@ -30,6 +30,10 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
 
     const greta = new Greta({
+        Login: req.body.Login,
+
+        MotDePasse: req.body.MotDePasse,
+
         Mail: req.body.Mail
 
     });
@@ -58,7 +62,7 @@ router.get('/:postId', async (req, res) => {
 // Modifier un post 
 router.patch('/:postId', async (req, res) => {
     try {
-        const updatedPost = await Greta.updateOne({ _id: req.params.postId }, { $set: { Mail: req.body.Mail } });
+        const updatedPost = await Greta.updateOne({ _id: req.params.postId }, { $set: { Login: req.body.Login } }, { $set: { MotDePasse: req.body.MotDePasse } }, { $set: { Mail: req.body.Mail } });
         res.json(updatedPost);
     } catch (err) {
         res.json({ message: err });

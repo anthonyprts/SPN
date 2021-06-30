@@ -30,6 +30,10 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
 
     const admin = new Admin({
+        Login: req.body.Login,
+
+        MotDePasse: req.body.MotDePasse,
+
         idAdmin: req.body.idAdmin
     });
     console.log(req.body); //afficher le contenu de la requete
@@ -57,7 +61,7 @@ router.get('/:postId', async (req, res) => {
 // Modifier un post 
 router.patch('/:postId', async (req, res) => {
     try {
-        const updatedPost = await Admin.updateOne({ _id: req.params.postId }, { $set: { idAdmin: req.body.idAdmin } });
+        const updatedPost = await Admin.updateOne({ _id: req.params.postId }, { $set: { Login: req.body.Login } }, { $set: { MotDePasse: req.body.MotDePasse} }, { $set: { idAdmin: req.body.idAdmin } });
         res.json(updatedPost);
     } catch (err) {
         res.json({ message: err });

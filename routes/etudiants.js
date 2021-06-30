@@ -31,7 +31,10 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
 
     const etudiant = new Etudiant({
-        
+        Login: req.body.Login,
+
+        MotDePasse: req.body.MotDePasse,
+
         numEtudiant: req.body.numEtudiant,
         
         Nom: req.body.Nom,
@@ -69,7 +72,7 @@ router.get('/:postId', async (req, res) => {
 // Modifier un post 
 router.patch('/:postId', async (req, res) => {
     try {
-        const updatedPost = await Etudiant.updateOne({ _id: req.params.postId }, { $set: { numEtudiant: req.body.numEtudiant } }, { $set: { Nom: req.body.Nom } }, { $set: { Prenom: req.body.Prenom } }, { $set: { Promotion: req.body.Promotion } });
+        const updatedPost = await Etudiant.updateOne({ _id: req.params.postId }, { $set: { Login: req.body.Login } }, { $set: { MotDePasse: req.body.MotDePasse } }, { $set: { numEtudiant: req.body.numEtudiant } }, { $set: { Nom: req.body.Nom } }, { $set: { Prenom: req.body.Prenom } }, { $set: { Promotion: req.body.Promotion } });
         res.json(updatedPost);
     } catch (err) {
         res.json({ message: err });
