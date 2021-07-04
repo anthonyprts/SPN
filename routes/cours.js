@@ -12,13 +12,13 @@ Syntaxe: express.Router( [options] )
 
 const express = require('express'); //importer le paquet d'express
 const router = express.Router();
-const Etudiant = require('../models/Etudiant');// On importe le modele que l'on veux utiliser pour Post
+const Cours = require('../models/Cours');// On importe le modele que l'on veux utiliser pour Post
 
 // Recuperer tout les posts
 router.get('/', async (req, res) => {
     try {
-        const etudiants = await Etudiant.find();
-        res.json(etudiants);
+        const lesCours = await  Cours.find();
+        res.json(lesCours);
         console.log(req.query);
 
     } catch (err) {
@@ -30,27 +30,18 @@ router.get('/', async (req, res) => {
 // Enregistrer les informations dans la base de donnée
 router.post('/', async (req, res) => {
 
-    const etudiant = new Etudiant({
-        Login: req.body.Login,
+    const cours = new Cours({
+        Matiere: req.body.Matiere,
 
-        MotDePasse: req.body.MotDePasse,
+        DateDebut: req.body.DateDebut,
 
-        numEtudiant: req.body.numEtudiant,
-        
-        Nom: req.body.Nom,
-        
-        Prenom: req.body.Prenom,
-        
-        Promotion: req.body.Promotion,
-
-        Level: req.body.Level
-        
+        DateFin: req.body.DateFin
 
     });
     console.log(req.body); //afficher le contenu de la requete
     // Envoyer le nouveau post a la BD
     try {
-        const savedPost = await etudiant.save();
+        const savedPost = await cours.save();
         res.json(savedPost);
     } catch (err) {
         res.json({ message: err });
@@ -62,8 +53,8 @@ router.post('/', async (req, res) => {
 
 router.get('/:postId', async (req, res) => {
     try {
-        const etudiant = await Etudiant.findById(req.params.postId);
-        res.json(etudiant);
+        const cours = await Cours.findById(req.params.postId);
+        res.json(cours);
     } catch (err) {
         res.json({ message: err });
     }
@@ -72,7 +63,7 @@ router.get('/:postId', async (req, res) => {
 // Modifier un post 
 router.patch('/:postId', async (req, res) => {
     try {
-        const updatedPost = await Etudiant.updateOne({ _id: req.params.postId }, { $set: { Login: req.body.Login } }, { $set: { MotDePasse: req.body.MotDePasse } }, { $set: { numEtudiant: req.body.numEtudiant } }, { $set: { Nom: req.body.Nom } }, { $set: { Prenom: req.body.Prenom } }, { $set: { Promotion: req.body.Promotion } });
+        const updatedPost = await Cours.updateOne({ _id: req.params.postId }, { $set: { Matiere: req.body.Matiere } }, { $set: { DateDebut: req.body.DateDebut } }, { $set: { DateFin: req.body.DateFin } });
         res.json(updatedPost);
     } catch (err) {
         res.json({ message: err });

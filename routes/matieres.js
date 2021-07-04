@@ -12,13 +12,15 @@ Syntaxe: express.Router( [options] )
 
 const express = require('express'); //importer le paquet d'express
 const router = express.Router();
-const Etudiant = require('../models/Etudiant');// On importe le modele que l'on veux utiliser pour Post
+const Matiere = require('../models/Matiere');// On importe le modele que l'on veux utiliser pour Post
+
+// On importe le modele que l'on veux utiliser pour Post
 
 // Recuperer tout les posts
 router.get('/', async (req, res) => {
     try {
-        const etudiants = await Etudiant.find();
-        res.json(etudiants);
+        const matieres = await Matiere.find();
+        res.json(matieres);
         console.log(req.query);
 
     } catch (err) {
@@ -30,27 +32,16 @@ router.get('/', async (req, res) => {
 // Enregistrer les informations dans la base de donnée
 router.post('/', async (req, res) => {
 
-    const etudiant = new Etudiant({
-        Login: req.body.Login,
-
-        MotDePasse: req.body.MotDePasse,
-
-        numEtudiant: req.body.numEtudiant,
-        
+    const matiere = new Matiere({
         Nom: req.body.Nom,
-        
-        Prenom: req.body.Prenom,
-        
-        Promotion: req.body.Promotion,
 
-        Level: req.body.Level
-        
+        Professeur: req.body.Professeur
 
     });
     console.log(req.body); //afficher le contenu de la requete
     // Envoyer le nouveau post a la BD
     try {
-        const savedPost = await etudiant.save();
+        const savedPost = await matiere.save();
         res.json(savedPost);
     } catch (err) {
         res.json({ message: err });
@@ -62,8 +53,8 @@ router.post('/', async (req, res) => {
 
 router.get('/:postId', async (req, res) => {
     try {
-        const etudiant = await Etudiant.findById(req.params.postId);
-        res.json(etudiant);
+        const matiere = await Matiere.findById(req.params.postId);
+        res.json(matiere);
     } catch (err) {
         res.json({ message: err });
     }
@@ -72,7 +63,7 @@ router.get('/:postId', async (req, res) => {
 // Modifier un post 
 router.patch('/:postId', async (req, res) => {
     try {
-        const updatedPost = await Etudiant.updateOne({ _id: req.params.postId }, { $set: { Login: req.body.Login } }, { $set: { MotDePasse: req.body.MotDePasse } }, { $set: { numEtudiant: req.body.numEtudiant } }, { $set: { Nom: req.body.Nom } }, { $set: { Prenom: req.body.Prenom } }, { $set: { Promotion: req.body.Promotion } });
+        const updatedPost = await Matiere.updateOne({ _id: req.params.postId }, { $set: { Nom: req.body.Nom } }, { $set: { Professeur: req.body.Professeur } });
         res.json(updatedPost);
     } catch (err) {
         res.json({ message: err });
@@ -81,7 +72,7 @@ router.patch('/:postId', async (req, res) => {
 // Supprimer un post en recuperant son id
 router.delete('/:postId', async (req, res) => {
     try {
-        const removePost = await Etudiant.remove({ _id: req.params.postId });
+        const removePost = await Matiere.remove({ _id: req.params.postId });
         res.json(removePost);
     } catch (err) {
         res.json({ message: err });
