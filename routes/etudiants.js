@@ -12,7 +12,7 @@ Syntaxe: express.Router( [options] )
 
 const express = require('express'); //importer le paquet d'express
 const router = express.Router();
-const Etudiant = require('../models/Etudiant')
+const Etudiant = require('../models/Etudiant');
 // On importe le modele que l'on veux utiliser pour Post
 
 // Recuperer tout les posts
@@ -20,6 +20,7 @@ router.get('/', async (req, res) => {
     try {
         const etudiants = await Etudiant.find();
         res.json(etudiants);
+        console.log(req.query);
 
     } catch (err) {
         res.json({ message: err });
