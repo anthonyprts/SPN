@@ -13,7 +13,7 @@ const matiereSchema = mongoose.Schema({
         type: String,
         require: true,
     },
-    Professeur:{
+    leProfesseur:{
         type: Professeur,
         require: true,
     }

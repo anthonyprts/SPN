@@ -72,7 +72,10 @@ const etudiantRoute = require('./routes/etudiants');
 const professeurRoute = require('./routes/professeurs');
 const adminRoute = require('./routes/admins');
 const gretaRoute = require('./routes/gretas');
-const responsableRoute = require('./routes/responsables')
+const responsableRoute = require('./routes/responsables');
+const matiereRoute = require('./routes/matieres');
+const coursRoute = require('./routes/cours');
+const presenceRoute = require('./routes/presence');
 
 
 //Middlewares
@@ -83,6 +86,9 @@ app.use('/professeurs', professeurRoute);
 app.use('/admins', adminRoute);
 app.use('/gretas', gretaRoute);
 app.use('/responsables', responsableRoute);
+app.use('/matieres', matiereRoute);
+app.use('/cours', coursRoute);
+app.use('/presences', presenceRoute);
 
 //app.use('/user', userRoute);
 

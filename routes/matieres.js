@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
     const matiere = new Matiere({
         Nom: req.body.Nom,
 
-        Professeur: req.body.Professeur
+        leProfesseur: req.body.leProfesseur
 
     });
     console.log(req.body); //afficher le contenu de la requete
@@ -63,7 +63,7 @@ router.get('/:postId', async (req, res) => {
 // Modifier un post 
 router.patch('/:postId', async (req, res) => {
     try {
-        const updatedPost = await Matiere.updateOne({ _id: req.params.postId }, { $set: { Nom: req.body.Nom } }, { $set: { Professeur: req.body.Professeur } });
+        const updatedPost = await Matiere.updateOne({ _id: req.params.postId }, { $set: { Nom: req.body.Nom } }, { $set: { leProfesseur: req.body.leProfesseur } });
         res.json(updatedPost);
     } catch (err) {
         res.json({ message: err });
