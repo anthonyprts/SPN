@@ -11,13 +11,13 @@ const Etudiant = require('./Etudiant');
 
 const presenceSchema = mongoose.Schema({
     Etudiant: {
-        type: Etudiant,
-        require: true,
+        type: mongoose.Schema.ObjectId,
+        ref: Etudiant,
     },
 
     Cours: {
-        type: Cours,
-        require: true,
+        type: mongoose.Schema.ObjectId,
+        ref: Cours,
     },
     Date: {
         type: Date,

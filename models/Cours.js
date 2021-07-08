@@ -9,8 +9,8 @@ const Matiere = require('./Matiere')
 
 const coursSchema = mongoose.Schema({
     Matiere: {
-        type: Matiere,
-        require: true,
+        type: mongoose.Schema.ObjectId,
+        ref: Matiere,
     },
 
     DateDebut: {

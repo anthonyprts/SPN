@@ -68,6 +68,7 @@ app.use(bodyParser.json());
 // Importation des chemins/ routes
 
 const postsRoute = require('./routes/posts');
+const promotionRoute = require('./routes/promotions')
 const etudiantRoute = require('./routes/etudiants');
 const professeurRoute = require('./routes/professeurs');
 const adminRoute = require('./routes/admins');
@@ -81,6 +82,7 @@ const presenceRoute = require('./routes/presence');
 //Middlewares
 
 app.use('/posts', postsRoute);   // j'utilise le chemin /.... pour faire :
+app.use('/promotions', promotionRoute);
 app.use('/etudiants', etudiantRoute);
 app.use('/professeurs', professeurRoute);
 app.use('/admins', adminRoute);

@@ -6,21 +6,20 @@ Un modele de fichier de donner defini les attributs de la classes
 */
 
 const mongoose = require('mongoose'); //importer le paquet de mongoose
-const Professeur = require('./Professeur');
 
 
-const matiereSchema = mongoose.Schema({
+const promotionSchema = mongoose.Schema({
     Nom: {
         type: String,
         require: true,
     },
-    Professeur:{
-        type: mongoose.Schema.ObjectId, 
-        ref: Professeur,
-        
-        
+    EDT: {
+        type: String,
+        require:true,
+
+
     }
 });
 
 
-module.exports = mongoose.model('Matieres', matiereSchema);
+module.exports = mongoose.model('Promotions', promotionSchema);

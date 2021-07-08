@@ -23,11 +23,11 @@ const professeurSchema = mongoose.Schema({
     },
     Nom: {
         type: String,
-        require: true
+        require: true,
     },
     Prenom: {
         type: String,
-        require: true
+        require: true,
     },
    
     Level: {

@@ -72,7 +72,7 @@ router.patch('/:postId', async (req, res) => {
 // Supprimer un post en recuperant son id
 router.delete('/:postId', async (req, res) => {
     try {
-        const removePost = await Etudiant.remove({ _id: req.params.postId });
+        const removePost = await Cours.remove({ _id: req.params.postId });
         res.json(removePost);
     } catch (err) {
         res.json({ message: err });

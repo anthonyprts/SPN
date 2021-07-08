@@ -12,15 +12,13 @@ Syntaxe: express.Router( [options] )
 
 const express = require('express'); //importer le paquet d'express
 const router = express.Router();
-const Matiere = require('../models/Matiere');// On importe le modele que l'on veux utiliser pour Post
-
-// On importe le modele que l'on veux utiliser pour Post
+const Promotion = require('../models/Promotion');// On importe le modele que l'on veux utiliser pour Post
 
 // Recuperer tout les posts
 router.get('/', async (req, res) => {
     try {
-        const matieres = await Matiere.find();
-        res.json(matieres);
+        const promotions = await Promotion.find();
+        res.json(promotions);
         console.log(req.query);
 
     } catch (err) {
@@ -32,16 +30,17 @@ router.get('/', async (req, res) => {
 // Enregistrer les informations dans la base de donnée
 router.post('/', async (req, res) => {
 
-    const matiere = new Matiere({
+    const promotion = new Promotion({
         Nom: req.body.Nom,
 
-        Professeur: req.body.Professeur
+        EDT: req.body.EDT,
+
 
     });
     console.log(req.body); //afficher le contenu de la requete
     // Envoyer le nouveau post a la BD
     try {
-        const savedPost = await matiere.save();
+        const savedPost = await promotion.save();
         res.json(savedPost);
     } catch (err) {
         res.json({ message: err });
@@ -53,8 +52,8 @@ router.post('/', async (req, res) => {
 
 router.get('/:postId', async (req, res) => {
     try {
-        const matiere = await Matiere.findById(req.params.postId);
-        res.json(matiere);
+        const cours = await Promotion.findById(req.params.postId);
+        res.json(cours);
     } catch (err) {
         res.json({ message: err });
     }
@@ -63,7 +62,7 @@ router.get('/:postId', async (req, res) => {
 // Modifier un post 
 router.patch('/:postId', async (req, res) => {
     try {
-        const updatedPost = await Matiere.updateOne({ _id: req.params.postId }, { $set: { Nom: req.body.Nom } }, { $set: { leProfesseur: req.body.leProfesseur } });
+        const updatedPost = await Promotion.updateOne({ _id: req.params.postId }, { $set: { Nom: req.body.Nom } }, { $set: { EDT: req.body.EDT } });
         res.json(updatedPost);
     } catch (err) {
         res.json({ message: err });
@@ -72,7 +71,7 @@ router.patch('/:postId', async (req, res) => {
 // Supprimer un post en recuperant son id
 router.delete('/:postId', async (req, res) => {
     try {
-        const removePost = await Matiere.remove({ _id: req.params.postId });
+        const removePost = await Promotion.remove({ _id: req.params.postId });
         res.json(removePost);
     } catch (err) {
         res.json({ message: err });

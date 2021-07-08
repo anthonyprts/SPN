@@ -6,6 +6,7 @@ Un modele de fichier de donner defini les attributs de la classes
 */
 
 const mongoose = require('mongoose'); //importer le paquet de mongoose
+const Promotion = require('./Promotion');
 
 const etudiantSchema = mongoose.Schema({
     Login: {
@@ -23,19 +24,19 @@ const etudiantSchema = mongoose.Schema({
     },
     Nom: {
         type: String,
-        require: true
+        require: true,
     },
     Prenom: {
         type: String,
-        require: true
+        require: true,
     },
     Promotion: {
-        type: String,
-        require: true
+        type: mongoose.Schema.ObjectId,
+        ref: Promotion,
     },
     Level:{
         type: Number,
-        require: true
+        require: true,
     }
 });
 
