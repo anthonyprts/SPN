@@ -22,6 +22,10 @@ const etudiantSchema = mongoose.Schema({
         type: String,
         require: true,
     },
+    numCarteEtudiant: {
+        type: String,
+        require: true,
+    },
     Nom: {
         type: String,
         require: true,

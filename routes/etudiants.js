@@ -36,6 +36,8 @@ router.post('/', async (req, res) => {
         MotDePasse: req.body.MotDePasse,
 
         numEtudiant: req.body.numEtudiant,
+
+        numCarteEtudiant: req.body.numCarteEtudiant,
         
         Nom: req.body.Nom,
         
@@ -58,11 +60,24 @@ router.post('/', async (req, res) => {
 
 });
 
-// recuperer un posts specific avec son id 
-
+// recuperer un etudiant specific avec son id 
+/*
 router.get('/:postId', async (req, res) => {
     try {
         const etudiant = await Etudiant.findById(req.params.postId);
+        res.json(etudiant);
+    } catch (err) {
+        res.json({ message: err });
+    }
+});
+*/
+/*________________________________*/
+
+// recuperer un etudiant specific avec son identifiant lorsqu'il c'est connecté 
+
+router.get('/:loginEtu', async (req, res) => {
+    try {
+        const etudiant = await Etudiant.findOne({ Login: req.params.loginEtu });
         res.json(etudiant);
     } catch (err) {
         res.json({ message: err });
