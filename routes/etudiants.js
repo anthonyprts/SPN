@@ -49,7 +49,7 @@ router.post('/', async (req, res) => {
         
 
     });
-    console.log(req.body); //afficher le contenu de la requete
+    console.log(res.json); //afficher le contenu de la requete
     // Envoyer le nouveau post a la BD
     try {
         const savedPost = await etudiant.save();
@@ -79,6 +79,18 @@ router.get('/:loginEtu', async (req, res) => {
     try {
         const etudiant = await Etudiant.findOne({ Login: req.params.loginEtu });
         res.json(etudiant);
+        console.log(res.json);
+    } catch (err) {
+        res.json({ message: err });
+    }
+});
+
+// recuperer un etudiant specific avec son identifiant lorsqu'il c'est connecté 
+
+router.get('/:loginEtu', async (req, res) => {
+    try {
+        const etudiant = await Etudiant.findOne({ Login: req.params.loginEtu });
+        res.json(etudiant);
     } catch (err) {
         res.json({ message: err });
     }
@@ -94,9 +106,9 @@ router.patch('/:postId', async (req, res) => {
     }
 });
 // Supprimer un post en recuperant son id
-router.delete('/:postId', async (req, res) => {
+router.delete('/:loginEtu', async (req, res) => {
     try {
-        const removePost = await Etudiant.remove({ _id: req.params.postId });
+        const removePost = await Etudiant.remove({ Login: req.params.loginEtu });
         res.json(removePost);
     } catch (err) {
         res.json({ message: err });
