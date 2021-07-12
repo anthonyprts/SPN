@@ -52,6 +52,10 @@ const express = require('express'); //importer le paquet d'express
 
 const app = express(); 
 
+//-------------
+var https = require('https')
+var http = require('http')
+//---------
 const mongoose = require('mongoose'); //importer le paquet de mongoose
 
 const bodyParser = require('body-parser');
@@ -77,6 +81,7 @@ const responsableRoute = require('./routes/responsables');
 const matiereRoute = require('./routes/matieres');
 const coursRoute = require('./routes/cours');
 const presenceRoute = require('./routes/presence');
+const { Console } = require('console');
 
 
 //Middlewares
@@ -111,5 +116,10 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedT
 
 // Comment commencer à écouter le serveur
 
-app.listen(3000); 
+//app.listen();
 
+http.createServer(app).listen(80);
+https.createServer(app).listen(443);
+
+
+console.log();
